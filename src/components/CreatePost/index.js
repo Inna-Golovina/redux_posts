@@ -4,13 +4,19 @@ import { connect } from 'react-redux';
 import { createPost as createPostAction } from '../../redux/modules/posts';
 
 const CreatePost = ( {createPost} ) => {
+  const [form] = Form.useForm();
 
   const onSubmit = (value) => {
-    createPost(value)
+    console.log(value);
+    if(value.title && value.body) {
+      createPost(value)
+      form.resetFields();
+    }
   }
   return (
     <Form
       name="basic"
+      form={form}
       onFinish={onSubmit}
     >
       <Form.Item
